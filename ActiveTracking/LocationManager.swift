@@ -30,24 +30,41 @@ class LocationManager : NSObject  {
     
     private var distanceFilter : Double = 25 {
         didSet {
+            NSUserDefaults.save(NSNumber(double:distanceFilter), forKey: "DistanceFilterKey")
             locationManager.distanceFilter = distanceFilter
         }
     }
     
     private var desiredAccuracy : CLLocationAccuracy = kCLLocationAccuracyBest {
         didSet {
+            NSUserDefaults.save(NSNumber(double:desiredAccuracy), forKey: "DesiredAccuracyKey")
             locationManager.desiredAccuracy = desiredAccuracy
         }
     }
     
     override init() {
         super.init()
+        self.restoreUserPreferences()
         locationManager.delegate = self
         locationManager.desiredAccuracy = self.desiredAccuracy
         locationManager.distanceFilter = self.distanceFilter
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.activityType = CLActivityType.Fitness
         locationManager.allowsBackgroundLocationUpdates = true
+    }
+    
+    func restoreUserPreferences() {
+        //Restauro el filtor de distancia guardado
+        let storedDistanceFilter:NSNumber? = NSUserDefaults.retrieve("DistanceFilterKey") as? NSNumber
+        if let storedDistanceFilter = storedDistanceFilter {
+            self.distanceFilter = storedDistanceFilter.doubleValue
+        }
+        
+        //Restauro la precision deseada guardada
+        let storedDesiredAccuracy:NSNumber? = NSUserDefaults.retrieve("DesiredAccuracyKey") as? NSNumber
+        if let storedDesiredAccuracy = storedDesiredAccuracy {
+            self.desiredAccuracy = storedDesiredAccuracy.doubleValue
+        }
     }
     
     func startGPS() {
@@ -115,15 +132,11 @@ extension LocationManager : CLLocationManagerDelegate {
         }
         
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setValue(self.json, forKey: "JSONRecord-20-07-2015-2")
-        userDefaults.synchronize()
+        NSUserDefaults.save(self.json, forKey: "JSONRecord-20-07-2015-2")
     }
     
     func printJSON() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        let newdata:[NSObject : NSObject] = userDefaults.valueForKey("JSONRecord-20-07-2015-2") as! [NSObject : NSObject]
-        
+        let newdata:[NSObject : NSObject] =  NSUserDefaults.retrieve("JSONRecord-20-07-2015-2") as! [NSObject : NSObject]
         do {
             let data = try NSJSONSerialization.dataWithJSONObject(newdata, options:[])
             let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!

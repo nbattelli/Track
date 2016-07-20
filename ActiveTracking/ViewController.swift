@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController{
     
+    var picker : UIPickerView!
+    
     @IBOutlet var gpsStatusLabel : UILabel!
     @IBOutlet var gpsDistancesFilterTextField : UITextField!
     @IBOutlet var gpsDesiredAccuracyTextField : UITextField!
@@ -40,17 +42,22 @@ class ViewController: UIViewController{
         self.gpsDesiredAccuracyTextField.delegate = self
         self.gpsDesiredAccuracyTextField.text = self.locationManager.desiredAccuracyString()
         
-        let picker: UIPickerView
-        picker = UIPickerView(frame: CGRectMake(0, 200, view.frame.width, 300))
+        
+        
+        self.gpsDesiredAccuracyTextField.inputView = self.desiredAccuracyPicker()
+        self.gpsDesiredAccuracyTextField.inputAccessoryView = self.toolBar()
+        
+    }
+    
+    func desiredAccuracyPicker() -> UIPickerView {
+        self.picker = UIPickerView(frame: CGRectMake(0, 200, view.frame.width, 300))
         picker.backgroundColor = .whiteColor()
         
         picker.showsSelectionIndicator = true
         picker.delegate = self
         picker.dataSource = self
         
-        self.gpsDesiredAccuracyTextField.inputView = picker
-        self.gpsDesiredAccuracyTextField.inputAccessoryView = self.toolBar()
-        
+        return self.picker
     }
     
     func toolBar() -> UIToolbar {
@@ -104,6 +111,16 @@ class ViewController: UIViewController{
 }
 
 extension ViewController : UITextFieldDelegate {
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        
+        if textField == self.gpsDesiredAccuracyTextField {
+            let index = self.locationManager.desiredAccuracyStringArray().indexOf(self.locationManager.desiredAccuracyString())
+            picker.selectRow(index!, inComponent: 0, animated: false)
+        }
+        
+        return true
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         return true
     }

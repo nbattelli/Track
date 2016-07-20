@@ -22,26 +22,26 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectar movimiento cada" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eg-Bo-Pkx">
-                                <rect key="frame" x="20" y="122" width="202" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filtro movimiento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eg-Bo-Pkx">
+                                <rect key="frame" x="20" y="122" width="132" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e11-oI-pto">
-                                <rect key="frame" x="242" y="40" width="42" height="21"/>
+                                <rect key="frame" x="189" y="40" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wzb-qI-2MO">
-                                <rect key="frame" x="242" y="119" width="342" height="30"/>
+                                <rect key="frame" x="189" y="119" width="395" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GfK-OJ-Shk">
-                                <rect key="frame" x="242" y="78" width="342" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="189" y="78" width="395" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autorización del GPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VX-Sc-dTp">
@@ -71,8 +71,8 @@
                             <constraint firstItem="GfK-OJ-Shk" firstAttribute="baseline" secondItem="Twf-Iy-UkR" secondAttribute="baseline" id="V94-1I-sfz"/>
                             <constraint firstItem="4VX-Sc-dTp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="W2r-4n-7jb"/>
                             <constraint firstItem="Wzb-qI-2MO" firstAttribute="baseline" secondItem="5Eg-Bo-Pkx" secondAttribute="baseline" id="a8L-gC-Atk"/>
-                            <constraint firstItem="Wzb-qI-2MO" firstAttribute="leading" secondItem="5Eg-Bo-Pkx" secondAttribute="trailing" constant="20" id="bWa-yz-JBt"/>
                             <constraint firstAttribute="trailing" secondItem="Wzb-qI-2MO" secondAttribute="trailing" constant="16" id="dLr-Yq-uy4"/>
+                            <constraint firstItem="e11-oI-pto" firstAttribute="leading" secondItem="4VX-Sc-dTp" secondAttribute="trailing" constant="8" id="gaJ-PR-vdP"/>
                             <constraint firstItem="Twf-Iy-UkR" firstAttribute="top" secondItem="4VX-Sc-dTp" secondAttribute="bottom" constant="20" id="hvj-SX-EGE"/>
                             <constraint firstAttribute="trailing" secondItem="GfK-OJ-Shk" secondAttribute="trailing" constant="16" id="jYy-gv-hdX"/>
                             <constraint firstItem="gxT-yF-X6d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="jdv-la-LwO"/>
