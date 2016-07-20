@@ -26,7 +26,9 @@ class LocationManager : NSObject  {
     
     var locationManager = CLLocationManager()
     
-    private var distanceFilter : Double = 20.0 {
+    var json : [NSObject : NSObject] = [:]
+    
+    private var distanceFilter : Double = 25 {
         didSet {
             locationManager.distanceFilter = distanceFilter
         }
@@ -43,6 +45,9 @@ class LocationManager : NSObject  {
         locationManager.delegate = self
         locationManager.desiredAccuracy = self.desiredAccuracy
         locationManager.distanceFilter = self.distanceFilter
+        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.activityType = CLActivityType.Fitness
+        locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func startGPS() {
@@ -75,7 +80,67 @@ class LocationManager : NSObject  {
     func authorizationStatusString() -> String {
         return authorizationStatusMapDictionary[self.authorizationStatus()]!
     }
+}
+
+extension LocationManager : CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let eventDate = location.timestamp
+            let howRecent = eventDate.timeIntervalSinceNow
+            
+            // Detecto cuanto tiempo paso desde el ultimo trackeo
+            if abs(howRecent) < 1.0 {
+                self.log(location)
+            }
+        }
+    }
     
+    func log(location:CLLocation) {
+        
+//        let fileString = "JSON.dat"
+        
+        let newPoint = ["latitude":"\(location.coordinate.latitude)",
+                        "longitude":"\(location.coordinate.longitude)",
+                        "timeStamp":"\(NSDate())",
+                        "gpsDetectionMethod":"standard",
+                        "deciredAccuracy":"\(self.desiredAccuracyString())",
+                        "distanceFilter":"\(self.distanceFilterString())"]
+        
+        if self.json["coordinates"] == nil {
+            self.json["coordinates"] = [newPoint]
+        } else {
+            var coordinates:[NSObject] = self.json["coordinates"] as! [NSObject]
+            coordinates.append(newPoint)
+            self.json["coordinates"] = coordinates
+        }
+        
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setValue(self.json, forKey: "JSONRecord-20-07-2015-2")
+        userDefaults.synchronize()
+    }
+    
+    func printJSON() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let newdata:[NSObject : NSObject] = userDefaults.valueForKey("JSONRecord-20-07-2015-2") as! [NSObject : NSObject]
+        
+        do {
+            let data = try NSJSONSerialization.dataWithJSONObject(newdata, options:[])
+            let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+            print(dataString)
+            
+            // do other stuff on success
+            
+        } catch {
+            print("JSON serialization failed:  \(error)")
+        }
+    }
+    
+}
+
+
+//MARK: Distance Filter methods
+extension LocationManager {
     func distanceFilterString() -> String {
         return "\(Int(self.distanceFilter))"
     }
@@ -83,7 +148,10 @@ class LocationManager : NSObject  {
     func updateDistanceFilter(distanceFilter : String) {
         self.distanceFilter = Double(distanceFilter)!
     }
+}
 
+//MARK: Desired Accuracy methods 
+extension LocationManager {
     func desiredAccuracyString() -> String {
         return desiredAccuracyMapDictionary[self.desiredAccuracy]!
     }
@@ -103,23 +171,6 @@ class LocationManager : NSObject  {
             }
         }
     }
-}
-
-extension LocationManager : CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        if let location = locations.last {
-            let eventDate = location.timestamp
-            let howRecent = eventDate.timeIntervalSinceNow
-            
-            // Detecto cuanto tiempo paso desde el ultimo trackeo
-            if abs(howRecent) < 5.0 {
-                let trackInformation = "latitude: \(location.coordinate.latitude), longitude: \(location.coordinate.longitude), timeStamp: \(eventDate)"
-                print(trackInformation)
-            }
-        }
-    }
-    
 }
 
 

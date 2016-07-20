@@ -97,6 +97,10 @@ class ViewController: UIViewController{
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func printJSONAction() {
+        self.locationManager.printJSON()
+    }
 }
 
 extension ViewController : UITextFieldDelegate {

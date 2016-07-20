@@ -50,6 +50,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxT-yF-X6d">
+                                <rect key="frame" x="20" y="173" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="printJSONAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="F27-Zt-7r4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -58,6 +65,7 @@
                             <constraint firstItem="e11-oI-pto" firstAttribute="leading" secondItem="GfK-OJ-Shk" secondAttribute="leading" id="Gc2-Ee-dYJ"/>
                             <constraint firstItem="e11-oI-pto" firstAttribute="baseline" secondItem="4VX-Sc-dTp" secondAttribute="baseline" id="IP5-6u-7y6"/>
                             <constraint firstItem="5Eg-Bo-Pkx" firstAttribute="top" secondItem="Twf-Iy-UkR" secondAttribute="bottom" constant="20" id="JkP-84-zht"/>
+                            <constraint firstItem="gxT-yF-X6d" firstAttribute="top" secondItem="5Eg-Bo-Pkx" secondAttribute="bottom" constant="30" id="KQc-6z-Uz4"/>
                             <constraint firstItem="GfK-OJ-Shk" firstAttribute="leading" secondItem="Wzb-qI-2MO" secondAttribute="leading" id="LV6-DW-7lA"/>
                             <constraint firstItem="5Eg-Bo-Pkx" firstAttribute="leading" secondItem="Twf-Iy-UkR" secondAttribute="leading" id="PDc-A7-vWj"/>
                             <constraint firstItem="GfK-OJ-Shk" firstAttribute="baseline" secondItem="Twf-Iy-UkR" secondAttribute="baseline" id="V94-1I-sfz"/>
@@ -67,6 +75,7 @@
                             <constraint firstAttribute="trailing" secondItem="Wzb-qI-2MO" secondAttribute="trailing" constant="16" id="dLr-Yq-uy4"/>
                             <constraint firstItem="Twf-Iy-UkR" firstAttribute="top" secondItem="4VX-Sc-dTp" secondAttribute="bottom" constant="20" id="hvj-SX-EGE"/>
                             <constraint firstAttribute="trailing" secondItem="GfK-OJ-Shk" secondAttribute="trailing" constant="16" id="jYy-gv-hdX"/>
+                            <constraint firstItem="gxT-yF-X6d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="jdv-la-LwO"/>
                         </constraints>
                     </view>
                     <connections>
