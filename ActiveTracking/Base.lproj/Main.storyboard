@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ActiveTracking" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +15,69 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Precisión deseada" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Twf-Iy-UkR">
+                                <rect key="frame" x="20" y="81" width="140" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectar movimiento cada" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eg-Bo-Pkx">
+                                <rect key="frame" x="20" y="122" width="202" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e11-oI-pto">
+                                <rect key="frame" x="242" y="40" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wzb-qI-2MO">
+                                <rect key="frame" x="242" y="119" width="342" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GfK-OJ-Shk">
+                                <rect key="frame" x="242" y="78" width="342" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autorización del GPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VX-Sc-dTp">
+                                <rect key="frame" x="20" y="40" width="161" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4VX-Sc-dTp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="0sB-vc-TZg"/>
+                            <constraint firstItem="Twf-Iy-UkR" firstAttribute="leading" secondItem="4VX-Sc-dTp" secondAttribute="leading" id="AJu-Us-rHe"/>
+                            <constraint firstItem="e11-oI-pto" firstAttribute="leading" secondItem="GfK-OJ-Shk" secondAttribute="leading" id="Gc2-Ee-dYJ"/>
+                            <constraint firstItem="e11-oI-pto" firstAttribute="baseline" secondItem="4VX-Sc-dTp" secondAttribute="baseline" id="IP5-6u-7y6"/>
+                            <constraint firstItem="5Eg-Bo-Pkx" firstAttribute="top" secondItem="Twf-Iy-UkR" secondAttribute="bottom" constant="20" id="JkP-84-zht"/>
+                            <constraint firstItem="GfK-OJ-Shk" firstAttribute="leading" secondItem="Wzb-qI-2MO" secondAttribute="leading" id="LV6-DW-7lA"/>
+                            <constraint firstItem="5Eg-Bo-Pkx" firstAttribute="leading" secondItem="Twf-Iy-UkR" secondAttribute="leading" id="PDc-A7-vWj"/>
+                            <constraint firstItem="GfK-OJ-Shk" firstAttribute="baseline" secondItem="Twf-Iy-UkR" secondAttribute="baseline" id="V94-1I-sfz"/>
+                            <constraint firstItem="4VX-Sc-dTp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="W2r-4n-7jb"/>
+                            <constraint firstItem="Wzb-qI-2MO" firstAttribute="baseline" secondItem="5Eg-Bo-Pkx" secondAttribute="baseline" id="a8L-gC-Atk"/>
+                            <constraint firstItem="Wzb-qI-2MO" firstAttribute="leading" secondItem="5Eg-Bo-Pkx" secondAttribute="trailing" constant="20" id="bWa-yz-JBt"/>
+                            <constraint firstAttribute="trailing" secondItem="Wzb-qI-2MO" secondAttribute="trailing" constant="16" id="dLr-Yq-uy4"/>
+                            <constraint firstItem="Twf-Iy-UkR" firstAttribute="top" secondItem="4VX-Sc-dTp" secondAttribute="bottom" constant="20" id="hvj-SX-EGE"/>
+                            <constraint firstAttribute="trailing" secondItem="GfK-OJ-Shk" secondAttribute="trailing" constant="16" id="jYy-gv-hdX"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="gpsDesiredAccuracyTextField" destination="GfK-OJ-Shk" id="pnB-dU-Nym"/>
+                        <outlet property="gpsDistancesFilterTextField" destination="Wzb-qI-2MO" id="OeS-WC-N21"/>
+                        <outlet property="gpsStatusLabel" destination="e11-oI-pto" id="zXS-nh-WQZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="303" y="260"/>
         </scene>
     </scenes>
 </document>
