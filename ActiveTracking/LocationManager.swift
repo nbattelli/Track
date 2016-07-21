@@ -9,19 +9,6 @@
 import UIKit
 import CoreLocation
 
-let desiredAccuracyMapDictionary = [kCLLocationAccuracyBestForNavigation: "Mejor precisión para navegación",
-                                kCLLocationAccuracyBest:"Mejor precisión",
-                                kCLLocationAccuracyNearestTenMeters:"Precisión cercana a 10mts",
-                                kCLLocationAccuracyHundredMeters:"Precisión cercana a 100mts",
-                                kCLLocationAccuracyKilometer:"Precisión cercana a 1km",
-                                kCLLocationAccuracyThreeKilometers:"Precisión cercana a 3kms"]
-
-let authorizationStatusMapDictionary = [CLAuthorizationStatus.NotDetermined: "Sin definir",
-                                        CLAuthorizationStatus.Restricted: "Restringido",
-                                        CLAuthorizationStatus.Denied: "Denegado",
-                                        CLAuthorizationStatus.AuthorizedWhenInUse: "Mientras se use",
-                                        CLAuthorizationStatus.AuthorizedAlways: "Siempre"]
-
 class LocationManager : NSObject  {
     
     var locationManager = CLLocationManager()
@@ -107,48 +94,10 @@ extension LocationManager : CLLocationManagerDelegate {
             
             // Detecto cuanto tiempo paso desde el ultimo trackeo
             if abs(howRecent) < 1.0 {
-                self.log(location)
+                SQLiteManager.addCoordinate(location, deciredAccuracy: self.desiredAccuracyString(), distanceFilter: self.distanceFilter)
             }
         }
     }
-    
-    func log(location:CLLocation) {
-        
-//        let fileString = "JSON.dat"
-        
-        let newPoint = ["latitude":"\(location.coordinate.latitude)",
-                        "longitude":"\(location.coordinate.longitude)",
-                        "timeStamp":"\(NSDate())",
-                        "gpsDetectionMethod":"standard",
-                        "deciredAccuracy":"\(self.desiredAccuracyString())",
-                        "distanceFilter":"\(self.distanceFilterString())"]
-        
-        if self.json["coordinates"] == nil {
-            self.json["coordinates"] = [newPoint]
-        } else {
-            var coordinates:[NSObject] = self.json["coordinates"] as! [NSObject]
-            coordinates.append(newPoint)
-            self.json["coordinates"] = coordinates
-        }
-        
-        
-        NSUserDefaults.save(self.json, forKey: "JSONRecord-20-07-2015-2")
-    }
-    
-    func printJSON() {
-        let newdata:[NSObject : NSObject] =  NSUserDefaults.retrieve("JSONRecord-20-07-2015-2") as! [NSObject : NSObject]
-        do {
-            let data = try NSJSONSerialization.dataWithJSONObject(newdata, options:[])
-            let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!
-            print(dataString)
-            
-            // do other stuff on success
-            
-        } catch {
-            print("JSON serialization failed:  \(error)")
-        }
-    }
-    
 }
 
 

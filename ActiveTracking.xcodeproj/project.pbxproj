@@ -13,9 +13,12 @@
 		0F05C0181D3EE1BE003C54BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F05C0171D3EE1BE003C54BA /* Assets.xcassets */; };
 		0F05C01B1D3EE1BE003C54BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F05C0191D3EE1BE003C54BA /* LaunchScreen.storyboard */; };
 		0F05C0261D3EE1BE003C54BA /* ActiveTrackingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F05C0251D3EE1BE003C54BA /* ActiveTrackingTests.swift */; };
+		0FD3F83B1D404CC2009AB54C /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3F83A1D404CC2009AB54C /* SQLiteManager.swift */; };
+		0FD3F83F1D406436009AB54C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3F83E1D406436009AB54C /* Constants.swift */; };
 		0FEAFEAF1D3EE34F00082249 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEAFEAE1D3EE34F00082249 /* CoreLocation.framework */; };
 		0FEAFEB11D3EE36D00082249 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEAFEB01D3EE36D00082249 /* LocationManager.swift */; };
 		0FF59D361D40331B00BE9301 /* NSUserDefaults+Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF59D351D40331B00BE9301 /* NSUserDefaults+Save.swift */; };
+		E8DF04580AE8B6ECBA4A547F /* Pods_ActiveTracking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81DEE3FB038CF258DF50E566 /* Pods_ActiveTracking.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +42,14 @@
 		0F05C0211D3EE1BE003C54BA /* ActiveTrackingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ActiveTrackingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F05C0251D3EE1BE003C54BA /* ActiveTrackingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTrackingTests.swift; sourceTree = "<group>"; };
 		0F05C0271D3EE1BE003C54BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FD3F83A1D404CC2009AB54C /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		0FD3F83E1D406436009AB54C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0FEAFEAE1D3EE34F00082249 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FEAFEB01D3EE36D00082249 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0FF59D351D40331B00BE9301 /* NSUserDefaults+Save.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+Save.swift"; sourceTree = "<group>"; };
+		2D32F0A9A47DE00F8EE8BC69 /* Pods-ActiveTracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActiveTracking.release.xcconfig"; path = "Pods/Target Support Files/Pods-ActiveTracking/Pods-ActiveTracking.release.xcconfig"; sourceTree = "<group>"; };
+		81DEE3FB038CF258DF50E566 /* Pods_ActiveTracking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ActiveTracking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEB0BD61DD27130B712031E1 /* Pods-ActiveTracking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActiveTracking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ActiveTracking/Pods-ActiveTracking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FEAFEAF1D3EE34F00082249 /* CoreLocation.framework in Frameworks */,
+				E8DF04580AE8B6ECBA4A547F /* Pods_ActiveTracking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,9 +76,10 @@
 			isa = PBXGroup;
 			children = (
 				0F05C00C1D3EE1BE003C54BA /* ActiveTracking */,
-				0FEAFEAE1D3EE34F00082249 /* CoreLocation.framework */,
 				0F05C0241D3EE1BE003C54BA /* ActiveTrackingTests */,
 				0F05C00B1D3EE1BE003C54BA /* Products */,
+				FF8E48E7CD21DE4E8F123C30 /* Pods */,
+				A452BFF5AEB51BC1C3F5DA42 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,9 +95,10 @@
 		0F05C00C1D3EE1BE003C54BA /* ActiveTracking */ = {
 			isa = PBXGroup;
 			children = (
+				0FD3F83D1D40642B009AB54C /* Utils */,
+				0FD3F83C1D404EDA009AB54C /* Manager */,
 				0F05C00D1D3EE1BE003C54BA /* AppDelegate.swift */,
 				0F05C00F1D3EE1BE003C54BA /* ViewController.swift */,
-				0FEAFEB01D3EE36D00082249 /* LocationManager.swift */,
 				0FF59D351D40331B00BE9301 /* NSUserDefaults+Save.swift */,
 				0F05C0111D3EE1BE003C54BA /* Main.storyboard */,
 				0F05C0171D3EE1BE003C54BA /* Assets.xcassets */,
@@ -106,6 +117,41 @@
 			path = ActiveTrackingTests;
 			sourceTree = "<group>";
 		};
+		0FD3F83C1D404EDA009AB54C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				0FEAFEB01D3EE36D00082249 /* LocationManager.swift */,
+				0FD3F83A1D404CC2009AB54C /* SQLiteManager.swift */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		0FD3F83D1D40642B009AB54C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0FD3F83E1D406436009AB54C /* Constants.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		A452BFF5AEB51BC1C3F5DA42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0FEAFEAE1D3EE34F00082249 /* CoreLocation.framework */,
+				81DEE3FB038CF258DF50E566 /* Pods_ActiveTracking.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF8E48E7CD21DE4E8F123C30 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0BD61DD27130B712031E1 /* Pods-ActiveTracking.debug.xcconfig */,
+				2D32F0A9A47DE00F8EE8BC69 /* Pods-ActiveTracking.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,9 +159,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F05C02A1D3EE1BE003C54BA /* Build configuration list for PBXNativeTarget "ActiveTracking" */;
 			buildPhases = (
+				DE5B536C7A26EE696BF7F11B /* [CP] Check Pods Manifest.lock */,
 				0F05C0061D3EE1BE003C54BA /* Sources */,
 				0F05C0071D3EE1BE003C54BA /* Frameworks */,
 				0F05C0081D3EE1BE003C54BA /* Resources */,
+				E05DFA1006C1397224C08AE6 /* [CP] Embed Pods Frameworks */,
+				E66B2FE10C28B4196EABF86E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -156,6 +205,7 @@
 				TargetAttributes = {
 					0F05C0091D3EE1BE003C54BA = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = P7R8N949RV;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -207,6 +257,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DE5B536C7A26EE696BF7F11B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E05DFA1006C1397224C08AE6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ActiveTracking/Pods-ActiveTracking-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E66B2FE10C28B4196EABF86E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ActiveTracking/Pods-ActiveTracking-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0F05C0061D3EE1BE003C54BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -214,8 +312,10 @@
 			files = (
 				0FF59D361D40331B00BE9301 /* NSUserDefaults+Save.swift in Sources */,
 				0FEAFEB11D3EE36D00082249 /* LocationManager.swift in Sources */,
+				0FD3F83B1D404CC2009AB54C /* SQLiteManager.swift in Sources */,
 				0F05C0101D3EE1BE003C54BA /* ViewController.swift in Sources */,
 				0F05C00E1D3EE1BE003C54BA /* AppDelegate.swift in Sources */,
+				0FD3F83F1D406436009AB54C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,25 +442,33 @@
 		};
 		0F05C02B1D3EE1BE003C54BA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEB0BD61DD27130B712031E1 /* Pods-ActiveTracking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ActiveTracking/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbattelli.ActiveTracking;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbattelli.ActiveTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		0F05C02C1D3EE1BE003C54BA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D32F0A9A47DE00F8EE8BC69 /* Pods-ActiveTracking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = ActiveTracking/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbattelli.ActiveTracking;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbattelli.ActiveTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

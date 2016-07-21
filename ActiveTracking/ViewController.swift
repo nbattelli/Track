@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class ViewController: UIViewController{
     
@@ -21,6 +22,8 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SQLiteManager.createDB()
+        
         self.setupView()
         
         self.askAuthorization()
@@ -28,6 +31,13 @@ class ViewController: UIViewController{
     }
     
     func setupView () {
+        
+        let path = NSSearchPathForDirectoriesInDomains(
+            .DocumentDirectory, .UserDomainMask, true
+            ).first!
+        
+        print(path)
+        
         // Label estado de gps
         self.gpsStatusLabel.text = self.locationManager.authorizationStatusString()
         
@@ -98,15 +108,59 @@ class ViewController: UIViewController{
         }
         
         if authorizationAlertMessage.characters.count > 0 {
-            let alertController = UIAlertController(title: "Error en la autorización del uso del gps", message: authorizationAlertMessage, preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Aceptar", style: .Default, handler:nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.showAlertMessage("Error en la autorización del uso del gps", message: authorizationAlertMessage)
         }
     }
     
     @IBAction func printJSONAction() {
-        self.locationManager.printJSON()
+        print(SQLiteManager.retrieveAllRowsAsJSONString())
+    }
+    
+    @IBAction private func saveToDiskAndSendEmail() {
+        if let jsonString = SQLiteManager.retrieveAllRowsAsJSONString() {
+            do {
+                do {
+                //Remove old file
+                let fileManager = NSFileManager.defaultManager()
+                try fileManager.removeItemAtPath(locationJSONFilePath())
+                } catch {}
+                
+                try jsonString.writeToFile(locationJSONFilePath(), atomically: true, encoding: NSUTF8StringEncoding)
+                self.emailFile()
+            } catch {
+                self.showAlertMessage("Error", message: "No se pudo generar el archivo para mandar el mail")
+            }
+        } else {
+            self.showAlertMessage("Error", message: "No se obtuvieron localizaciones")
+        }
+    }
+    
+    @IBAction private func cleanDataBase() {
+        SQLiteManager.clearAllRows()
+    }
+    
+    private func emailFile() {
+        if( MFMailComposeViewController.canSendMail() ) {
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self
+            
+            //Set the subject and message of the email
+            mailComposer.setSubject("Subject")
+            mailComposer.setMessageBody("body text", isHTML: false)
+            
+            if let fileData = NSData(contentsOfFile:locationJSONFilePath()) {
+                mailComposer.addAttachmentData(fileData, mimeType: "text/txt", fileName: "locations.json")
+            }
+            
+            self.presentViewController(mailComposer, animated: true, completion: nil)
+        }
+    }
+    
+    func showAlertMessage(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message:message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Aceptar", style: .Default, handler:nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
 
@@ -159,5 +213,11 @@ extension ViewController : UIPickerViewDelegate, UIPickerViewDataSource {
         self.locationManager.updateDesiredAccuracy(selectedDesiredAccuracy)
     }
     
+}
+
+extension ViewController : MFMailComposeViewControllerDelegate {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
