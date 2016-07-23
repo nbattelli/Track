@@ -50,64 +50,99 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxT-yF-X6d">
-                                <rect key="frame" x="20" y="173" width="70" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="TMY-ak-2Ef"/>
-                                </constraints>
-                                <state key="normal" title="Log"/>
-                                <connections>
-                                    <action selector="printJSONAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="F27-Zt-7r4"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFt-vQ-WXW">
-                                <rect key="frame" x="130" y="173" width="70" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="qDQ-Xs-UII"/>
-                                </constraints>
-                                <state key="normal" title="Email"/>
-                                <connections>
-                                    <action selector="saveToDiskAndSendEmail" destination="BYZ-38-t0r" eventType="touchUpInside" id="qCE-yI-v2N"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06T-5h-ad8">
-                                <rect key="frame" x="240" y="173" width="70" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="3hV-j6-Q7w"/>
-                                </constraints>
-                                <state key="normal" title="Clean DB"/>
-                                <connections>
-                                    <action selector="cleanDataBase" destination="BYZ-38-t0r" eventType="touchUpInside" id="qWj-Lf-ESw"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guardar cuando" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6b-y0-AGg">
+                                <rect key="frame" x="20" y="189" width="123.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Precisión mejor a:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlr-zr-Zwg">
+                                <rect key="frame" x="20" y="230" width="136" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tiempo mayor a:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B05-GJ-F9X">
+                                <rect key="frame" x="20" y="270.5" width="127.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DQY-2B-wgL">
+                                <rect key="frame" x="189" y="226" width="395" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bs3-pZ-5MK">
+                                <rect key="frame" x="189" y="266.5" width="391" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ymn-fL-rBt">
+                                <rect key="frame" x="20" y="326.5" width="112" height="106"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFt-vQ-WXW">
+                                        <rect key="frame" x="0.0" y="0.0" width="108" height="30"/>
+                                        <state key="normal" title="Email Full JSON"/>
+                                        <connections>
+                                            <action selector="sendFullJSON" destination="BYZ-38-t0r" eventType="touchUpInside" id="xcK-tC-6cM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppl-c8-oPi">
+                                        <rect key="frame" x="0.0" y="38" width="112" height="30"/>
+                                        <state key="normal" title="Email Geo JSON"/>
+                                        <connections>
+                                            <action selector="sendJSONForGeoJSON" destination="BYZ-38-t0r" eventType="touchUpInside" id="387-mo-Q3K"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06T-5h-ad8">
+                                        <rect key="frame" x="0.0" y="76" width="64" height="30"/>
+                                        <state key="normal" title="Clean DB"/>
+                                        <connections>
+                                            <action selector="cleanDataBase" destination="BYZ-38-t0r" eventType="touchUpInside" id="qWj-Lf-ESw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4VX-Sc-dTp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="0sB-vc-TZg"/>
+                            <constraint firstItem="B05-GJ-F9X" firstAttribute="leading" secondItem="Zlr-zr-Zwg" secondAttribute="leading" id="2rs-VI-Tzv"/>
                             <constraint firstItem="Twf-Iy-UkR" firstAttribute="leading" secondItem="4VX-Sc-dTp" secondAttribute="leading" id="AJu-Us-rHe"/>
+                            <constraint firstItem="B05-GJ-F9X" firstAttribute="top" secondItem="Zlr-zr-Zwg" secondAttribute="bottom" constant="20" id="BCu-Ey-ftz"/>
                             <constraint firstItem="e11-oI-pto" firstAttribute="leading" secondItem="GfK-OJ-Shk" secondAttribute="leading" id="Gc2-Ee-dYJ"/>
-                            <constraint firstItem="dFt-vQ-WXW" firstAttribute="leading" secondItem="gxT-yF-X6d" secondAttribute="trailing" constant="40" id="HnA-zi-Igy"/>
                             <constraint firstItem="e11-oI-pto" firstAttribute="baseline" secondItem="4VX-Sc-dTp" secondAttribute="baseline" id="IP5-6u-7y6"/>
                             <constraint firstItem="5Eg-Bo-Pkx" firstAttribute="top" secondItem="Twf-Iy-UkR" secondAttribute="bottom" constant="20" id="JkP-84-zht"/>
-                            <constraint firstItem="gxT-yF-X6d" firstAttribute="top" secondItem="5Eg-Bo-Pkx" secondAttribute="bottom" constant="30" id="KQc-6z-Uz4"/>
+                            <constraint firstItem="Zlr-zr-Zwg" firstAttribute="top" secondItem="W6b-y0-AGg" secondAttribute="bottom" constant="20" id="Kzl-fx-yWU"/>
                             <constraint firstItem="GfK-OJ-Shk" firstAttribute="leading" secondItem="Wzb-qI-2MO" secondAttribute="leading" id="LV6-DW-7lA"/>
+                            <constraint firstItem="Zlr-zr-Zwg" firstAttribute="leading" secondItem="W6b-y0-AGg" secondAttribute="leading" id="Nci-th-J7L"/>
+                            <constraint firstItem="bs3-pZ-5MK" firstAttribute="centerY" secondItem="B05-GJ-F9X" secondAttribute="centerY" id="OaO-h5-79b"/>
+                            <constraint firstItem="bs3-pZ-5MK" firstAttribute="leading" secondItem="DQY-2B-wgL" secondAttribute="leading" id="P6E-El-HgR"/>
                             <constraint firstItem="5Eg-Bo-Pkx" firstAttribute="leading" secondItem="Twf-Iy-UkR" secondAttribute="leading" id="PDc-A7-vWj"/>
+                            <constraint firstItem="Ymn-fL-rBt" firstAttribute="top" secondItem="B05-GJ-F9X" secondAttribute="bottom" constant="35" id="Q3O-CU-RaS"/>
                             <constraint firstItem="GfK-OJ-Shk" firstAttribute="baseline" secondItem="Twf-Iy-UkR" secondAttribute="baseline" id="V94-1I-sfz"/>
-                            <constraint firstItem="dFt-vQ-WXW" firstAttribute="centerY" secondItem="gxT-yF-X6d" secondAttribute="centerY" id="VFN-r6-2vP"/>
                             <constraint firstItem="4VX-Sc-dTp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="W2r-4n-7jb"/>
+                            <constraint firstItem="W6b-y0-AGg" firstAttribute="leading" secondItem="5Eg-Bo-Pkx" secondAttribute="leading" id="XTy-fB-geh"/>
+                            <constraint firstItem="DQY-2B-wgL" firstAttribute="leading" secondItem="Wzb-qI-2MO" secondAttribute="leading" id="XhW-Oe-QNc"/>
                             <constraint firstItem="Wzb-qI-2MO" firstAttribute="baseline" secondItem="5Eg-Bo-Pkx" secondAttribute="baseline" id="a8L-gC-Atk"/>
+                            <constraint firstItem="DQY-2B-wgL" firstAttribute="centerY" secondItem="Zlr-zr-Zwg" secondAttribute="centerY" id="bFA-7k-Teb"/>
                             <constraint firstAttribute="trailing" secondItem="Wzb-qI-2MO" secondAttribute="trailing" constant="16" id="dLr-Yq-uy4"/>
                             <constraint firstItem="e11-oI-pto" firstAttribute="leading" secondItem="4VX-Sc-dTp" secondAttribute="trailing" constant="8" id="gaJ-PR-vdP"/>
                             <constraint firstItem="Twf-Iy-UkR" firstAttribute="top" secondItem="4VX-Sc-dTp" secondAttribute="bottom" constant="20" id="hvj-SX-EGE"/>
                             <constraint firstAttribute="trailing" secondItem="GfK-OJ-Shk" secondAttribute="trailing" constant="16" id="jYy-gv-hdX"/>
-                            <constraint firstItem="gxT-yF-X6d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="jdv-la-LwO"/>
-                            <constraint firstItem="06T-5h-ad8" firstAttribute="leading" secondItem="dFt-vQ-WXW" secondAttribute="trailing" constant="40" id="vtg-re-oUR"/>
-                            <constraint firstItem="06T-5h-ad8" firstAttribute="centerY" secondItem="dFt-vQ-WXW" secondAttribute="centerY" id="zwL-u4-re3"/>
+                            <constraint firstItem="Ymn-fL-rBt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="m79-iN-hSz"/>
+                            <constraint firstItem="Ymn-fL-rBt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="r0B-r3-MKI"/>
+                            <constraint firstAttribute="trailing" secondItem="bs3-pZ-5MK" secondAttribute="trailing" constant="20" id="u9k-Yc-CDG"/>
+                            <constraint firstAttribute="trailing" secondItem="DQY-2B-wgL" secondAttribute="trailing" constant="16" id="uXR-Pm-I1L"/>
+                            <constraint firstItem="W6b-y0-AGg" firstAttribute="top" secondItem="Wzb-qI-2MO" secondAttribute="bottom" constant="40" id="yQv-aV-Amb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="gpsDesiredAccuracyTextField" destination="GfK-OJ-Shk" id="pnB-dU-Nym"/>
                         <outlet property="gpsDistancesFilterTextField" destination="Wzb-qI-2MO" id="OeS-WC-N21"/>
+                        <outlet property="gpsMinIntervalToLogTextField" destination="bs3-pZ-5MK" id="ubA-ma-Gco"/>
+                        <outlet property="gpsMinPrecisionToLogTextField" destination="DQY-2B-wgL" id="2P4-Rg-jaM"/>
                         <outlet property="gpsStatusLabel" destination="e11-oI-pto" id="zXS-nh-WQZ"/>
                     </connections>
                 </viewController>

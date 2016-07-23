@@ -23,20 +23,15 @@ let authorizationStatusMapDictionary = [CLAuthorizationStatus.NotDetermined: "Si
                                         CLAuthorizationStatus.AuthorizedAlways: "Siempre"]
 
 
-func dbPath() -> String {
-    let userPath = NSSearchPathForDirectoriesInDomains(
+func basePath() -> String {
+    return NSSearchPathForDirectoriesInDomains(
         .DocumentDirectory, .UserDomainMask, true
         ).first!
-    let dbName = "activeTracking.db"
-    
-    return "\(userPath)/\(dbName)"
 }
 
-func locationJSONFilePath() -> String {
-    let userPath = NSSearchPathForDirectoriesInDomains(
-        .DocumentDirectory, .UserDomainMask, true
-        ).first!
-    let jsonFile = "locations.json"
+func dbPath() -> String {
     
-    return "\(userPath)/\(jsonFile)"
+    let dbName = "activeTracking.db"
+    
+    return "\(basePath())/\(dbName)"
 }

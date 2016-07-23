@@ -16,6 +16,9 @@ class ViewController: UIViewController{
     @IBOutlet var gpsStatusLabel : UILabel!
     @IBOutlet var gpsDistancesFilterTextField : UITextField!
     @IBOutlet var gpsDesiredAccuracyTextField : UITextField!
+    
+    @IBOutlet var gpsMinIntervalToLogTextField : UITextField!
+    @IBOutlet var gpsMinPrecisionToLogTextField : UITextField!
 
     var locationManager = LocationManager()
     
@@ -51,12 +54,20 @@ class ViewController: UIViewController{
         // TextField Precisión deseada
         self.gpsDesiredAccuracyTextField.delegate = self
         self.gpsDesiredAccuracyTextField.text = self.locationManager.desiredAccuracyString()
-        
-        
-        
         self.gpsDesiredAccuracyTextField.inputView = self.desiredAccuracyPicker()
         self.gpsDesiredAccuracyTextField.inputAccessoryView = self.toolBar()
         
+        // TextField intervalo de tiempo
+        self.gpsMinIntervalToLogTextField.delegate = self
+        self.gpsMinIntervalToLogTextField.keyboardType = .NumbersAndPunctuation
+        self.gpsMinIntervalToLogTextField.text = "\(self.locationManager.minIntervalToLog)"
+        self.gpsMinIntervalToLogTextField.inputAccessoryView = self.toolBar()
+        
+        // TextField Precisión de la geopoint obtenida
+        self.gpsMinPrecisionToLogTextField.delegate = self
+        self.gpsMinPrecisionToLogTextField.keyboardType = .NumberPad
+        self.gpsMinPrecisionToLogTextField.text = "\(self.locationManager.minPrecisionToLog)"
+        self.gpsMinPrecisionToLogTextField.inputAccessoryView = self.toolBar()
     }
     
     func desiredAccuracyPicker() -> UIPickerView {
@@ -112,24 +123,17 @@ class ViewController: UIViewController{
         }
     }
     
-    @IBAction func printJSONAction() {
-        print(SQLiteManager.retrieveAllRowsAsJSONString())
+    @IBAction func sendFullJSON() {
+        if let jsonString = SQLiteManager.retrieveAllRowsAsJSONString() {
+            self.saveToDiskAndSendEmail(jsonString, fileName:"locations.json")
+        } else {
+            self.showAlertMessage("Error", message: "No se obtuvieron localizaciones")
+        }
     }
     
-    @IBAction private func saveToDiskAndSendEmail() {
-        if let jsonString = SQLiteManager.retrieveAllRowsAsJSONString() {
-            do {
-                do {
-                //Remove old file
-                let fileManager = NSFileManager.defaultManager()
-                try fileManager.removeItemAtPath(locationJSONFilePath())
-                } catch {}
-                
-                try jsonString.writeToFile(locationJSONFilePath(), atomically: true, encoding: NSUTF8StringEncoding)
-                self.emailFile()
-            } catch {
-                self.showAlertMessage("Error", message: "No se pudo generar el archivo para mandar el mail")
-            }
+    @IBAction func sendJSONForGeoJSON() {
+        if let jsonString = SQLiteManager.retrieveAllRowsForGeoJSONString() {
+            self.saveToDiskAndSendEmail(jsonString, fileName:"locationsForGeoJSON.json")
         } else {
             self.showAlertMessage("Error", message: "No se obtuvieron localizaciones")
         }
@@ -139,7 +143,25 @@ class ViewController: UIViewController{
         SQLiteManager.clearAllRows()
     }
     
-    private func emailFile() {
+    private func saveToDiskAndSendEmail(text:String, fileName:String) {
+        
+        let filePath = "\(basePath())/\(fileName)"
+        do {
+            do {
+            //Remove old file
+            let fileManager = NSFileManager.defaultManager()
+            try fileManager.removeItemAtPath(filePath)
+            } catch {}
+            
+            try text.writeToFile(filePath, atomically: true, encoding: NSUTF8StringEncoding)
+            self.emailFile(fileName)
+        } catch {
+            self.showAlertMessage("Error", message: "No se pudo generar el archivo para mandar el mail")
+        }
+    }
+    
+    private func emailFile(fileName:String) {
+        let filePath = "\(basePath())/\(fileName)"
         if( MFMailComposeViewController.canSendMail() ) {
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
@@ -148,8 +170,8 @@ class ViewController: UIViewController{
             mailComposer.setSubject("Subject")
             mailComposer.setMessageBody("body text", isHTML: false)
             
-            if let fileData = NSData(contentsOfFile:locationJSONFilePath()) {
-                mailComposer.addAttachmentData(fileData, mimeType: "text/txt", fileName: "locations.json")
+            if let fileData = NSData(contentsOfFile:filePath) {
+                mailComposer.addAttachmentData(fileData, mimeType: "text/txt", fileName: fileName)
             }
             
             self.presentViewController(mailComposer, animated: true, completion: nil)
@@ -180,6 +202,9 @@ extension ViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        if textField.text?.characters.count == 0 {
+            return
+        }
         if textField == self.gpsDistancesFilterTextField {
             var text = "5"
             if textField.text?.characters.count > 0 {
@@ -189,6 +214,10 @@ extension ViewController : UITextFieldDelegate {
             }
             
             self.locationManager.updateDistanceFilter(text)
+        } else if textField == self.gpsMinIntervalToLogTextField {
+            self.locationManager.minIntervalToLog = Double(textField.text!)!
+        } else if textField == self.gpsMinPrecisionToLogTextField {
+            self.locationManager.minPrecisionToLog = Int(textField.text!)!
         }
     }
 }

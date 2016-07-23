@@ -29,13 +29,25 @@ class LocationManager : NSObject  {
         }
     }
     
+    var minIntervalToLog : Double = 1 {
+        didSet {
+            NSUserDefaults.save(NSNumber(double:minIntervalToLog), forKey: "MinIntervalToLog")
+        }
+    }
+    
+    var minPrecisionToLog : Int = 60 {
+        didSet {
+            NSUserDefaults.save(NSNumber(integer:minPrecisionToLog), forKey: "MinPrecisionToLog")
+        }
+    }
+    
     override init() {
         super.init()
         self.restoreUserPreferences()
         locationManager.delegate = self
         locationManager.desiredAccuracy = self.desiredAccuracy
         locationManager.distanceFilter = self.distanceFilter
-        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.activityType = CLActivityType.Fitness
         locationManager.allowsBackgroundLocationUpdates = true
     }
@@ -51,6 +63,18 @@ class LocationManager : NSObject  {
         let storedDesiredAccuracy:NSNumber? = NSUserDefaults.retrieve("DesiredAccuracyKey") as? NSNumber
         if let storedDesiredAccuracy = storedDesiredAccuracy {
             self.desiredAccuracy = storedDesiredAccuracy.doubleValue
+        }
+
+        //Restauro el intervalo minimo para loguear
+        let storedMinIntervalToLog:NSNumber? = NSUserDefaults.retrieve("MinIntervalToLog") as? NSNumber
+        if let storedMinIntervalToLog = storedMinIntervalToLog {
+            self.minIntervalToLog = storedMinIntervalToLog.doubleValue
+        }
+        
+        //Restauro la precisión minima que debe tener una geo para loguear
+        let storedMinPrecisionToLog:NSNumber? = NSUserDefaults.retrieve("MinPrecisionToLog") as? NSNumber
+        if let storedMinPrecisionToLog = storedMinPrecisionToLog {
+            self.minPrecisionToLog = storedMinPrecisionToLog.integerValue
         }
     }
     
@@ -91,9 +115,15 @@ extension LocationManager : CLLocationManagerDelegate {
         if let location = locations.last {
             let eventDate = location.timestamp
             let howRecent = eventDate.timeIntervalSinceNow
+            print(location.horizontalAccuracy)
             
-            // Detecto cuanto tiempo paso desde el ultimo trackeo
-            if abs(howRecent) < 1.0 {
+            let satisfyMinInterval = abs(howRecent) < self.minIntervalToLog
+            let satisfyMinPrecision = location.horizontalAccuracy < Double(self.minPrecisionToLog)
+            
+            print("se trata de guardar how recent: \(abs(howRecent)), precision: \(location.horizontalAccuracy)")
+            if satisfyMinInterval && satisfyMinPrecision
+            {
+                print("se guardó how recent: \(abs(howRecent)), precision: \(location.horizontalAccuracy)")
                 SQLiteManager.addCoordinate(location, deciredAccuracy: self.desiredAccuracyString(), distanceFilter: self.distanceFilter)
             }
         }

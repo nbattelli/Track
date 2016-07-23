@@ -58,6 +58,25 @@ class SQLiteManager {
         }
     }
     
+    class func clearAllRows() {
+        do {
+            let db = try Connection(dbPath())
+            try db.run(locations.delete())
+        } catch {
+            print("no se pudo vaciar la tabla")
+        }
+    }
+}
+
+extension SQLiteManager {
+    
+    class func timeStampArgentina(date:NSDate) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone(name: "GMT-3")
+        return dateFormatter.stringFromDate(date)
+    }
+
     class func retrieveAllRowsAsDictionary() -> [NSObject : NSObject]? {
         do {
             let db = try Connection(dbPath())
@@ -69,7 +88,7 @@ class SQLiteManager {
                                          "speed":"\(location[speedRow])",
                                          "deciredAccuracy":"\(location[deciredAccuracyRow])",
                                          "distanceFilter":"\(location[distanceFilterRow])",
-                                         "timeStamp":"\(location[timeStampRow])"]
+                                         "timeStamp":timeStampArgentina(location[timeStampRow])]
                 locationsArray.append(locationDirectory)
             }
             
@@ -81,17 +100,76 @@ class SQLiteManager {
         return nil
     }
     
-    class func clearAllRows() {
+    class func retrieveAllRowsForGoogleMaps() -> [[NSObject : NSObject]]? {
         do {
             let db = try Connection(dbPath())
-            try db.run(locations.delete())
+            
+            var locationsArray : [[NSObject : NSObject]] = []
+            for location in try db.prepare(locations) {
+                let locationDirectory = ["lat":location[latitudeRow],
+                                         "lng":location[longitudeRow]]
+                locationsArray.append(locationDirectory)
+            }
+            
+            return locationsArray
+            
         } catch {
-           print("no se pudo vaciar la tabla")
+            print("error obteniendo locations")
         }
+        return nil
+    }
+    
+    class func retrieveAllRowsForGeoJSON() -> [NSObject : NSObject]? {
+        do {
+            let db = try Connection(dbPath())
+            
+            var locationsArray : [AnyObject] = []
+            for location in try db.prepare(locations) {
+                let locationDirectory = [location[longitudeRow],location[latitudeRow]]
+                locationsArray.append(locationDirectory)
+            }
+            
+            
+            
+            return ["type":"Feature",
+                    "geometry":["type":"LineString","coordinates":locationsArray]]
+            
+        } catch {
+            print("error obteniendo locations")
+        }
+        return nil
     }
     
     class func retrieveAllRowsAsJSONString() -> String? {
         if let json = SQLiteManager.retrieveAllRowsAsDictionary() {
+            do {
+                let data = try NSJSONSerialization.dataWithJSONObject(json, options:[])
+                let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                return dataString as String
+            } catch {
+                print("JSON serialization failed:  \(error)")
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    class func retrieveAllRowsForGoogleMapsString() -> String? {
+        if let json = SQLiteManager.retrieveAllRowsForGoogleMaps() {
+            do {
+                let data = try NSJSONSerialization.dataWithJSONObject(json, options:[])
+                let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                return dataString as String
+            } catch {
+                print("JSON serialization failed:  \(error)")
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    class func retrieveAllRowsForGeoJSONString() -> String? {
+        if let json = SQLiteManager.retrieveAllRowsForGeoJSON() {
             do {
                 let data = try NSJSONSerialization.dataWithJSONObject(json, options:[])
                 let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!
