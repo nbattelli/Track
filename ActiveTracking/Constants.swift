@@ -16,16 +16,16 @@ let desiredAccuracyMapDictionary = [kCLLocationAccuracyBestForNavigation: "Mejor
                                     kCLLocationAccuracyKilometer:"Precisión cercana a 1km",
                                     kCLLocationAccuracyThreeKilometers:"Precisión cercana a 3kms"]
 
-let authorizationStatusMapDictionary = [CLAuthorizationStatus.NotDetermined: "Sin definir",
-                                        CLAuthorizationStatus.Restricted: "Restringido",
-                                        CLAuthorizationStatus.Denied: "Denegado",
-                                        CLAuthorizationStatus.AuthorizedWhenInUse: "Mientras se use",
-                                        CLAuthorizationStatus.AuthorizedAlways: "Siempre"]
+let authorizationStatusMapDictionary = [CLAuthorizationStatus.notDetermined: "Sin definir",
+                                        CLAuthorizationStatus.restricted: "Restringido",
+                                        CLAuthorizationStatus.denied: "Denegado",
+                                        CLAuthorizationStatus.authorizedWhenInUse: "Mientras se use",
+                                        CLAuthorizationStatus.authorizedAlways: "Siempre"]
 
 
 func basePath() -> String {
     return NSSearchPathForDirectoriesInDomains(
-        .DocumentDirectory, .UserDomainMask, true
+        .documentDirectory, .userDomainMask, true
         ).first!
 }
 

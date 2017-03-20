@@ -15,29 +15,29 @@ class LocationManager : NSObject  {
     
     var json : [NSObject : NSObject] = [:]
     
-    private var distanceFilter : Double = 25 {
+    fileprivate var distanceFilter : Double = 25 {
         didSet {
-            NSUserDefaults.save(NSNumber(double:distanceFilter), forKey: "DistanceFilterKey")
+            UserDefaults.save(NSNumber(value: distanceFilter as Double), forKey: "DistanceFilterKey")
             locationManager.distanceFilter = distanceFilter
         }
     }
     
-    private var desiredAccuracy : CLLocationAccuracy = kCLLocationAccuracyBest {
+    fileprivate var desiredAccuracy : CLLocationAccuracy = kCLLocationAccuracyBest {
         didSet {
-            NSUserDefaults.save(NSNumber(double:desiredAccuracy), forKey: "DesiredAccuracyKey")
+            UserDefaults.save(NSNumber(value: desiredAccuracy as Double), forKey: "DesiredAccuracyKey")
             locationManager.desiredAccuracy = desiredAccuracy
         }
     }
     
     var minIntervalToLog : Double = 1 {
         didSet {
-            NSUserDefaults.save(NSNumber(double:minIntervalToLog), forKey: "MinIntervalToLog")
+            UserDefaults.save(NSNumber(value: minIntervalToLog as Double), forKey: "MinIntervalToLog")
         }
     }
     
     var minPrecisionToLog : Int = 60 {
         didSet {
-            NSUserDefaults.save(NSNumber(integer:minPrecisionToLog), forKey: "MinPrecisionToLog")
+            UserDefaults.save(NSNumber(value: minPrecisionToLog as Int), forKey: "MinPrecisionToLog")
         }
     }
     
@@ -48,33 +48,33 @@ class LocationManager : NSObject  {
         locationManager.desiredAccuracy = self.desiredAccuracy
         locationManager.distanceFilter = self.distanceFilter
         locationManager.pausesLocationUpdatesAutomatically = false
-        locationManager.activityType = CLActivityType.Fitness
+        locationManager.activityType = CLActivityType.fitness
         locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func restoreUserPreferences() {
         //Restauro el filtor de distancia guardado
-        let storedDistanceFilter:NSNumber? = NSUserDefaults.retrieve("DistanceFilterKey") as? NSNumber
+        let storedDistanceFilter:NSNumber? = UserDefaults.retrieve("DistanceFilterKey") as? NSNumber
         if let storedDistanceFilter = storedDistanceFilter {
             self.distanceFilter = storedDistanceFilter.doubleValue
         }
         
         //Restauro la precision deseada guardada
-        let storedDesiredAccuracy:NSNumber? = NSUserDefaults.retrieve("DesiredAccuracyKey") as? NSNumber
+        let storedDesiredAccuracy:NSNumber? = UserDefaults.retrieve("DesiredAccuracyKey") as? NSNumber
         if let storedDesiredAccuracy = storedDesiredAccuracy {
             self.desiredAccuracy = storedDesiredAccuracy.doubleValue
         }
 
         //Restauro el intervalo minimo para loguear
-        let storedMinIntervalToLog:NSNumber? = NSUserDefaults.retrieve("MinIntervalToLog") as? NSNumber
+        let storedMinIntervalToLog:NSNumber? = UserDefaults.retrieve("MinIntervalToLog") as? NSNumber
         if let storedMinIntervalToLog = storedMinIntervalToLog {
             self.minIntervalToLog = storedMinIntervalToLog.doubleValue
         }
         
         //Restauro la precisión minima que debe tener una geo para loguear
-        let storedMinPrecisionToLog:NSNumber? = NSUserDefaults.retrieve("MinPrecisionToLog") as? NSNumber
+        let storedMinPrecisionToLog:NSNumber? = UserDefaults.retrieve("MinPrecisionToLog") as? NSNumber
         if let storedMinPrecisionToLog = storedMinPrecisionToLog {
-            self.minPrecisionToLog = storedMinPrecisionToLog.integerValue
+            self.minPrecisionToLog = storedMinPrecisionToLog.intValue
         }
     }
     
@@ -90,8 +90,8 @@ class LocationManager : NSObject  {
         let status = CLLocationManager.authorizationStatus()
         
         let isEnable = CLLocationManager.locationServicesEnabled()
-        let hasAuthorizedStatus = (status == .AuthorizedAlways &&
-                                   status == .AuthorizedWhenInUse)
+        let hasAuthorizedStatus = (status == .authorizedAlways &&
+                                   status == .authorizedWhenInUse)
         
         return isEnable && hasAuthorizedStatus
     }
@@ -111,7 +111,7 @@ class LocationManager : NSObject  {
 }
 
 extension LocationManager : CLLocationManagerDelegate {
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             let eventDate = location.timestamp
             let howRecent = eventDate.timeIntervalSinceNow
@@ -137,7 +137,7 @@ extension LocationManager {
         return "\(Int(self.distanceFilter))"
     }
     
-    func updateDistanceFilter(distanceFilter : String) {
+    func updateDistanceFilter(_ distanceFilter : String) {
         self.distanceFilter = Double(distanceFilter)!
     }
 }
@@ -156,7 +156,7 @@ extension LocationManager {
         return array
     }
     
-    func updateDesiredAccuracy(desiredAccuracy:String) {
+    func updateDesiredAccuracy(_ desiredAccuracy:String) {
         for key in desiredAccuracyMapDictionary.keys {
             if desiredAccuracyMapDictionary[key] == desiredAccuracy {
                 self.desiredAccuracy = key

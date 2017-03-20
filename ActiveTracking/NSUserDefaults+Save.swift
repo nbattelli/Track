@@ -8,15 +8,15 @@
 
 import Foundation
 
-extension NSUserDefaults {
-    class func save(object:AnyObject, forKey key:String) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+extension UserDefaults {
+    class func save(_ object:AnyObject, forKey key:String) {
+        let userDefaults = UserDefaults.standard
         userDefaults.setValue(object, forKey:key)
         userDefaults.synchronize()
     }
     
-    class func retrieve(key:String) -> AnyObject? {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        return userDefaults.valueForKey(key)
+    class func retrieve(_ key:String) -> AnyObject? {
+        let userDefaults = UserDefaults.standard
+        return userDefaults.value(forKey: key) as AnyObject?
     }
 }

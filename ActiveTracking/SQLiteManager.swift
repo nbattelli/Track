@@ -19,7 +19,7 @@ class SQLiteManager {
     static let speedRow = Expression<Double>("speed")
     static let deciredAccuracyRow = Expression<String>("decired_accuracy")
     static let distanceFilterRow = Expression<Double>("distance_filter")
-    static let timeStampRow = Expression<NSDate>("time_stamp")
+    static let timeStampRow = Expression<Date>("time_stamp")
     
     class func createDB() {
         do {
@@ -42,7 +42,7 @@ class SQLiteManager {
         }
     }
     
-    class func addCoordinate(location:CLLocation, deciredAccuracy:String, distanceFilter:Double) {
+    class func addCoordinate(_ location:CLLocation, deciredAccuracy:String, distanceFilter:Double) {
         
         do {
             let db = try Connection(dbPath())
@@ -52,7 +52,7 @@ class SQLiteManager {
                 speedRow <- location.speed,
                 deciredAccuracyRow <- deciredAccuracy,
                 distanceFilterRow <- distanceFilter,
-                timeStampRow <- NSDate()))
+                timeStampRow <- Date()))
         } catch {
             print("error insertando locations")
         }
@@ -70,18 +70,18 @@ class SQLiteManager {
 
 extension SQLiteManager {
     
-    class func timeStampArgentina(date:NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
+    class func timeStampArgentina(_ date:Date) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = NSTimeZone(name: "GMT-3")
-        return dateFormatter.stringFromDate(date)
+        dateFormatter.timeZone = TimeZone(identifier: "GMT-3")
+        return dateFormatter.string(from: date)
     }
 
-    class func retrieveAllRowsAsDictionary() -> [NSObject : NSObject]? {
+    class func retrieveAllRowsAsDictionary() -> [String : [Any]]? {
         do {
             let db = try Connection(dbPath())
     
-            var locationsArray : [AnyObject] = []
+            var locationsArray : [Any] = []
             for location in try db.prepare(locations) {
                 let locationDirectory = ["latitude":"\(location[latitudeRow])",
                                          "longitude":"\(location[longitudeRow])",
@@ -100,11 +100,11 @@ extension SQLiteManager {
         return nil
     }
     
-    class func retrieveAllRowsForGoogleMaps() -> [[NSObject : NSObject]]? {
+    class func retrieveAllRowsForGoogleMaps() -> [[String : Double]]? {
         do {
             let db = try Connection(dbPath())
             
-            var locationsArray : [[NSObject : NSObject]] = []
+            var locationsArray : [[String : Double]] = []
             for location in try db.prepare(locations) {
                 let locationDirectory = ["lat":location[latitudeRow],
                                          "lng":location[longitudeRow]]
@@ -119,11 +119,11 @@ extension SQLiteManager {
         return nil
     }
     
-    class func retrieveAllRowsForGeoJSON() -> [NSObject : NSObject]? {
+    class func retrieveAllRowsForGeoJSON() -> [String : Any]? {
         do {
             let db = try Connection(dbPath())
             
-            var locationsArray : [AnyObject] = []
+            var locationsArray : [Any] = []
             for location in try db.prepare(locations) {
                 let locationDirectory = [location[longitudeRow],location[latitudeRow]]
                 locationsArray.append(locationDirectory)
@@ -132,7 +132,8 @@ extension SQLiteManager {
             
             
             return ["type":"Feature",
-                    "geometry":["type":"LineString","coordinates":locationsArray]]
+                    "geometry":["type":"LineString",
+                                "coordinates":locationsArray]]
             
         } catch {
             print("error obteniendo locations")
@@ -143,8 +144,8 @@ extension SQLiteManager {
     class func retrieveAllRowsAsJSONString() -> String? {
         if let json = SQLiteManager.retrieveAllRowsAsDictionary() {
             do {
-                let data = try NSJSONSerialization.dataWithJSONObject(json, options:[])
-                let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                let data = try JSONSerialization.data(withJSONObject: json, options:[])
+                let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
                 return dataString as String
             } catch {
                 print("JSON serialization failed:  \(error)")
@@ -157,8 +158,8 @@ extension SQLiteManager {
     class func retrieveAllRowsForGoogleMapsString() -> String? {
         if let json = SQLiteManager.retrieveAllRowsForGoogleMaps() {
             do {
-                let data = try NSJSONSerialization.dataWithJSONObject(json, options:[])
-                let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                let data = try JSONSerialization.data(withJSONObject: json, options:[])
+                let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
                 return dataString as String
             } catch {
                 print("JSON serialization failed:  \(error)")
@@ -171,8 +172,8 @@ extension SQLiteManager {
     class func retrieveAllRowsForGeoJSONString() -> String? {
         if let json = SQLiteManager.retrieveAllRowsForGeoJSON() {
             do {
-                let data = try NSJSONSerialization.dataWithJSONObject(json, options:[])
-                let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                let data = try JSONSerialization.data(withJSONObject: json, options:[])
+                let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
                 return dataString as String
             } catch {
                 print("JSON serialization failed:  \(error)")

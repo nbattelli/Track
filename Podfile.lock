@@ -1,12 +1,14 @@
 PODS:
-  - SQLite.swift (0.10.1)
+  - SQLite.swift (0.11.2):
+    - SQLite.swift/standard (= 0.11.2)
+  - SQLite.swift/standard (0.11.2)
 
 DEPENDENCIES:
-  - SQLite.swift (~> 0.10.1)
+  - SQLite.swift (~> 0.11.2)
 
 SPEC CHECKSUMS:
-  SQLite.swift: 6a6e4b034efc317ce4e203b6af2d3024fee2b570
+  SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
 
-PODFILE CHECKSUM: 19801f279c7b532a553175538f9c89b67d0bb87f
+PODFILE CHECKSUM: b05e14d1d7ed563456eff2ba8696005d001e9a9b
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0
