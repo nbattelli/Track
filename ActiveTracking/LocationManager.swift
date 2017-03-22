@@ -11,37 +11,41 @@ import CoreLocation
 
 class LocationManager : NSObject  {
     
-    var locationManager = CLLocationManager()
+    static let sharedInstance = LocationManager()
     
-    var json : [NSObject : NSObject] = [:]
+    fileprivate let locationManager = CLLocationManager()
     
-    fileprivate var distanceFilter : Double = 25 {
+    fileprivate var json : [NSObject : NSObject] = [:]
+    
+    var isRunning : Bool = false
+    
+    var distanceFilter : Double = 25 {
         didSet {
-            UserDefaults.save(NSNumber(value: distanceFilter as Double), forKey: "DistanceFilterKey")
+            UserDefaults.save(NSNumber(value: distanceFilter), forKey: "DistanceFilterKey")
             locationManager.distanceFilter = distanceFilter
         }
     }
     
-    fileprivate var desiredAccuracy : CLLocationAccuracy = kCLLocationAccuracyBest {
+    var desiredAccuracy : CLLocationAccuracy = kCLLocationAccuracyBest {
         didSet {
-            UserDefaults.save(NSNumber(value: desiredAccuracy as Double), forKey: "DesiredAccuracyKey")
+            UserDefaults.save(NSNumber(value: desiredAccuracy), forKey: "DesiredAccuracyKey")
             locationManager.desiredAccuracy = desiredAccuracy
         }
     }
     
     var minIntervalToLog : Double = 1 {
         didSet {
-            UserDefaults.save(NSNumber(value: minIntervalToLog as Double), forKey: "MinIntervalToLog")
+            UserDefaults.save(NSNumber(value: minIntervalToLog), forKey: "MinIntervalToLog")
         }
     }
     
-    var minPrecisionToLog : Int = 60 {
+    var minPrecisionToLog : Double = 60 {
         didSet {
-            UserDefaults.save(NSNumber(value: minPrecisionToLog as Int), forKey: "MinPrecisionToLog")
+            UserDefaults.save(NSNumber(value: minPrecisionToLog), forKey: "MinPrecisionToLog")
         }
     }
     
-    override init() {
+    private override init() {
         super.init()
         self.restoreUserPreferences()
         locationManager.delegate = self
@@ -74,16 +78,18 @@ class LocationManager : NSObject  {
         //Restauro la precisión minima que debe tener una geo para loguear
         let storedMinPrecisionToLog:NSNumber? = UserDefaults.retrieve("MinPrecisionToLog") as? NSNumber
         if let storedMinPrecisionToLog = storedMinPrecisionToLog {
-            self.minPrecisionToLog = storedMinPrecisionToLog.intValue
+            self.minPrecisionToLog = storedMinPrecisionToLog.doubleValue
         }
     }
     
     func startGPS() {
         locationManager.startUpdatingLocation()
+        self.isRunning = true
     }
 
     func stopGPS() {
         self.locationManager.stopUpdatingLocation()
+        self.isRunning = false
     }
     
     func isAuthorized() -> Bool {
@@ -136,10 +142,6 @@ extension LocationManager {
     func distanceFilterString() -> String {
         return "\(Int(self.distanceFilter))"
     }
-    
-    func updateDistanceFilter(_ distanceFilter : String) {
-        self.distanceFilter = Double(distanceFilter)!
-    }
 }
 
 //MARK: Desired Accuracy methods 
@@ -147,21 +149,19 @@ extension LocationManager {
     func desiredAccuracyString() -> String {
         return desiredAccuracyMapDictionary[self.desiredAccuracy]!
     }
-    
-    func desiredAccuracyStringArray() -> [String] {
-        var array : [String] = []
-        for key in desiredAccuracyMapDictionary.keys {
-            array.append(desiredAccuracyMapDictionary[key]!)
-        }
-        return array
+}
+
+//MARK: Min Interval To Log methods
+extension LocationManager {
+    func minIntervalToLogString() -> String {
+        return "\(Int(self.minIntervalToLog))"
     }
-    
-    func updateDesiredAccuracy(_ desiredAccuracy:String) {
-        for key in desiredAccuracyMapDictionary.keys {
-            if desiredAccuracyMapDictionary[key] == desiredAccuracy {
-                self.desiredAccuracy = key
-            }
-        }
+}
+
+//MARK: Min Precision To Log methods
+extension LocationManager {
+    func minPrecisionToLogString() -> String {
+        return "\(Int(self.minPrecisionToLog))"
     }
 }
 

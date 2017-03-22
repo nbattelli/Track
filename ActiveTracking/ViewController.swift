@@ -44,7 +44,7 @@ class ViewController: UIViewController{
     @IBOutlet var gpsMinIntervalToLogTextField : UITextField!
     @IBOutlet var gpsMinPrecisionToLogTextField : UITextField!
 
-    var locationManager = LocationManager()
+    let locationManager = LocationManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,8 +99,6 @@ class ViewController: UIViewController{
         picker.backgroundColor = .white
         
         picker.showsSelectionIndicator = true
-        picker.delegate = self
-        picker.dataSource = self
         
         return self.picker
     }
@@ -211,15 +209,6 @@ class ViewController: UIViewController{
 }
 
 extension ViewController : UITextFieldDelegate {
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        if textField == self.gpsDesiredAccuracyTextField {
-            let index = self.locationManager.desiredAccuracyStringArray().index(of: self.locationManager.desiredAccuracyString())
-            picker.selectRow(index!, inComponent: 0, animated: false)
-        }
-        
-        return true
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
@@ -237,35 +226,13 @@ extension ViewController : UITextFieldDelegate {
                 textField.text = text
             }
             
-            self.locationManager.updateDistanceFilter(text)
+//            self.locationManager.updateDistanceFilter(text)
         } else if textField == self.gpsMinIntervalToLogTextField {
             self.locationManager.minIntervalToLog = Double(textField.text!)!
         } else if textField == self.gpsMinPrecisionToLogTextField {
-            self.locationManager.minPrecisionToLog = Int(textField.text!)!
+            self.locationManager.minPrecisionToLog = Double(textField.text!)!
         }
     }
-}
-
-extension ViewController : UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.locationManager.desiredAccuracyStringArray().count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.locationManager.desiredAccuracyStringArray()[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedDesiredAccuracy = self.locationManager.desiredAccuracyStringArray()[row]
-        self.gpsDesiredAccuracyTextField.text = selectedDesiredAccuracy
-        self.locationManager.updateDesiredAccuracy(selectedDesiredAccuracy)
-    }
-    
 }
 
 extension ViewController : MFMailComposeViewControllerDelegate {

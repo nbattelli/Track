@@ -13,9 +13,12 @@
 		0F05C0181D3EE1BE003C54BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F05C0171D3EE1BE003C54BA /* Assets.xcassets */; };
 		0F05C01B1D3EE1BE003C54BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F05C0191D3EE1BE003C54BA /* LaunchScreen.storyboard */; };
 		0F05C0261D3EE1BE003C54BA /* ActiveTrackingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F05C0251D3EE1BE003C54BA /* ActiveTrackingTests.swift */; };
+		0F9162131E80B49C00D617BB /* GPSAccuracyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9162121E80B49C00D617BB /* GPSAccuracyTableViewController.swift */; };
+		0F9162151E80B98D00D617BB /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9162141E80B98D00D617BB /* SettingsTableViewController.swift */; };
 		0FA80D901D43089D0015A294 /* GeoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA80D8F1D43089D0015A294 /* GeoJSON.swift */; };
 		0FD3F83B1D404CC2009AB54C /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3F83A1D404CC2009AB54C /* SQLiteManager.swift */; };
 		0FD3F83F1D406436009AB54C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD3F83E1D406436009AB54C /* Constants.swift */; };
+		0FE4A4BB1E82271600D6B13A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4A4BA1E82271600D6B13A /* MainViewController.swift */; };
 		0FEAFEAF1D3EE34F00082249 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEAFEAE1D3EE34F00082249 /* CoreLocation.framework */; };
 		0FEAFEB11D3EE36D00082249 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEAFEB01D3EE36D00082249 /* LocationManager.swift */; };
 		0FF59D361D40331B00BE9301 /* NSUserDefaults+Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF59D351D40331B00BE9301 /* NSUserDefaults+Save.swift */; };
@@ -43,9 +46,12 @@
 		0F05C0211D3EE1BE003C54BA /* ActiveTrackingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ActiveTrackingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F05C0251D3EE1BE003C54BA /* ActiveTrackingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTrackingTests.swift; sourceTree = "<group>"; };
 		0F05C0271D3EE1BE003C54BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F9162121E80B49C00D617BB /* GPSAccuracyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPSAccuracyTableViewController.swift; sourceTree = "<group>"; };
+		0F9162141E80B98D00D617BB /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		0FA80D8F1D43089D0015A294 /* GeoJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoJSON.swift; sourceTree = "<group>"; };
 		0FD3F83A1D404CC2009AB54C /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
 		0FD3F83E1D406436009AB54C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0FE4A4BA1E82271600D6B13A /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0FEAFEAE1D3EE34F00082249 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FEAFEB01D3EE36D00082249 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0FF59D351D40331B00BE9301 /* NSUserDefaults+Save.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+Save.swift"; sourceTree = "<group>"; };
@@ -97,11 +103,13 @@
 		0F05C00C1D3EE1BE003C54BA /* ActiveTracking */ = {
 			isa = PBXGroup;
 			children = (
+				0F9162111E80B38100D617BB /* Settings */,
 				0FA80D8F1D43089D0015A294 /* GeoJSON.swift */,
 				0FD3F83D1D40642B009AB54C /* Utils */,
 				0FD3F83C1D404EDA009AB54C /* Manager */,
 				0F05C00D1D3EE1BE003C54BA /* AppDelegate.swift */,
 				0F05C00F1D3EE1BE003C54BA /* ViewController.swift */,
+				0FE4A4BA1E82271600D6B13A /* MainViewController.swift */,
 				0FF59D351D40331B00BE9301 /* NSUserDefaults+Save.swift */,
 				0F05C0111D3EE1BE003C54BA /* Main.storyboard */,
 				0F05C0171D3EE1BE003C54BA /* Assets.xcassets */,
@@ -118,6 +126,15 @@
 				0F05C0271D3EE1BE003C54BA /* Info.plist */,
 			);
 			path = ActiveTrackingTests;
+			sourceTree = "<group>";
+		};
+		0F9162111E80B38100D617BB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0F9162141E80B98D00D617BB /* SettingsTableViewController.swift */,
+				0F9162121E80B49C00D617BB /* GPSAccuracyTableViewController.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		0FD3F83C1D404EDA009AB54C /* Manager */ = {
@@ -318,10 +335,13 @@
 				0FF59D361D40331B00BE9301 /* NSUserDefaults+Save.swift in Sources */,
 				0FEAFEB11D3EE36D00082249 /* LocationManager.swift in Sources */,
 				0FD3F83B1D404CC2009AB54C /* SQLiteManager.swift in Sources */,
+				0F9162131E80B49C00D617BB /* GPSAccuracyTableViewController.swift in Sources */,
 				0FA80D901D43089D0015A294 /* GeoJSON.swift in Sources */,
 				0F05C0101D3EE1BE003C54BA /* ViewController.swift in Sources */,
 				0F05C00E1D3EE1BE003C54BA /* AppDelegate.swift in Sources */,
 				0FD3F83F1D406436009AB54C /* Constants.swift in Sources */,
+				0F9162151E80B98D00D617BB /* SettingsTableViewController.swift in Sources */,
+				0FE4A4BB1E82271600D6B13A /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
